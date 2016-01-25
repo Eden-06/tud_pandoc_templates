@@ -1,0 +1,315 @@
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+\documentclass[english,ngerman,BCOR=6mm,cdgeometry=no,DIV=13,twoside,cdmath=false]{tudscrreprt}
+\usepackage{selinput}\SelectInputMappings{adieresis={ä},germandbls={ß}}
+\usepackage{scrhack} % To fix some of the warnings regarding floats
+
+\usepackage[T1]{fontenc}
+
+\usepackage[main=english]{babel}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{isodate}
+
+\usepackage[table]{xcolor}
+\definecolor{LinkColor}{rgb}{0,0,0.3}
+
+
+% typical mathesymbols
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{wasysym}
+
+
+
+\usepackage[cmbright]{sfmath}
+
+
+% to allow subfigures inside the figure Environment
+\usepackage{subfig}
+% insert images
+\usepackage{graphicx}
+% make all include graphics correspond to width and aspectratio
+\setkeys{Gin}{width=\linewidth,keepaspectratio}
+
+% use bibliography
+\usepackage[authoryear]{natbib}
+
+%allow urls in the code
+% Definitionen von Farben
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,%
+           linkcolor=LinkColor,%
+           citecolor=LinkColor,%
+           filecolor=LinkColor,%
+           menucolor=LinkColor,%
+           %pagecolor=LinkColor,%
+           urlcolor=LinkColor}
+
+% insert sourcecode
+\usepackage{listings}
+% package for advanzed enumerations
+\usepackage{enumerate}
+
+%Packages and declarations for acronyms
+\usepackage[single,sort]{acro}
+\DeclareAcronym{RML}{
+short = RML, long = Role Modeling Language%
+, short-plural = s%
+, long-plural = s%
+}
+
+
+
+%Preamble generated from md
+\usepackage{pbox} \usepackage{xspace} \usepackage{semantic}
+\newcommand{\I}{\ensuremath{\mathcal{I}}\xspace}
+\newcommand{\R}{\ensuremath{\mathcal{R}}\xspace}
+\newcommand{\true}{\ensuremath{\mathsf{T}}\xspace}
+\newcommand{\false}{\ensuremath{\mathsf{F}}\xspace}
+\newcommand{\nat}{\ensuremath{\mathbb{N}}\xspace}
+\DeclareMathOperator{\rimpl}{-\!{\triangleright}}
+\DeclareMathOperator{\requi}{\triangleleft-\!{\triangleright}}
+\DeclareMathOperator{\rproh}{\shortparallel}
+\DeclareMathOperator{\rdont}{\sim} \newtheorem{definition}{Definition}
+\newtheorem{example}{Example} \usepackage{blindtext}
+
+
+%allow todos in the text
+\newcommand{\todo}[1]{\fbox{\scriptsize\textbf{#1}}}
+\newcommand{\todoln}[1]{\fbox{\scriptsize\parbox{.9\linewidth}{\textbf{#1}}}}
+
+\begin{document}
+\faculty{Faculty of Computer Science}
+\department{}
+\institute{Institute of Software and Multimedia Technology}
+\chair{Software Technology Group}
+\date{30.9.2000}
+\author{Nathan Fillion}
+\title{A Family of Role Modeling Languages}
+\thesis{diss}
+\graduation[Dr.-Ing.]{Doktor-Ingenieur}
+\dateofbirth{01.01.1970}
+\placeofbirth{Moscow}
+
+
+
+\referee{Robert Picardo}
+
+\professor{Patrick Stewart\and Leonard Nimoy}
+
+
+
+%Use \thanks{footnotetext} for footnotes on the title page
+
+\dedication{For my loving children}
+
+%Turn of TUD style for part pages
+\renewcommand*{\partpagestyle}{plain}
+
+
+
+\maketitle
+
+%add acknowledgements
+
+\confirmation
+
+
+
+\TUDoption{abstract}{section,multiple}
+\begin{abstract}[pagestyle=plain]
+\blindtext
+\nextabstract[ngerman]
+\blindtext
+\end{abstract}
+
+\tableofcontents
+
+\part{State of the Art}
+
+\chapter{Introduction}\label{introduction}
+
+\ac{RML} is awesome \citep{kuehn2014}. \acfp{RML} are even better
+\citep{kuehn2014}.
+
+\section{Motivation}\label{motivation}
+
+\blindtext
+
+\section{Background}\label{background}
+
+\blindtext
+
+\section{Problem Definition}\label{problem-definition}
+
+\blindtext
+
+\section{Outline}\label{outline}
+
+\chapter{Prerequisites}\label{prerequisites}
+
+\section{First Order Logic}\label{first-order-logic}
+
+\blindtext
+
+\section{Feature Modeling}\label{feature-modeling}
+
+\blindtext
+
+\section{Language Product Lines}\label{language-product-lines}
+
+\chapter{Background}\label{background-1}
+
+\blindtext
+
+\section{The Nature of Roles}\label{the-nature-of-roles}
+
+\blindtext
+
+\subsection{Behavioral Nature}\label{behavioral-nature}
+
+\blindtext
+
+\subsection{Relational Nature}\label{relational-nature}
+
+\blindtext
+
+\subsection{Context-Dependent Nature}\label{context-dependent-nature}
+
+\part{Solution}
+
+\chapter{Formal Role-based Modeling
+Language}\label{formal-role-based-modeling-language}
+
+\section{Formalization}\label{formalization}
+
+\subsection{Type Level}\label{type-level}
+
+After introducing the ontological foundations and the graphical
+notation, we can introduce our formal model, starting on the type level.
+For brevity, we omitted the notion of \emph{attributes} from these
+definitions. Nevertheless, the necessary additions are presented in the
+Appendix.
+
+\begin{definition}[Compartment Role Object Model]
+Let $NT$, $RT$, $CT$, and $RST$ be mutual disjoint sets of 
+Natural Types, Role Types, Compartment Types, and Relationship Types, respectively.
+Then a \emph{Compartment Role Object Model (CROM)} is a tuple $\mathcal{M}=(NT, RT, CT,RST,\text{fills}, \text{parts}, \text{rel})$ where
+$\text{fills} \subseteq (NT \cup CT) \times RT$ is a relation,
+$\text{parts} : CT \rightarrow 2^{RT} $ and
+$\text{rel} : RST \rightarrow (RT \times RT$) are total functions.
+A CROM is denoted \emph{well-formed} if the following axioms hold:
+\begin{align}
+\forall rt \in RT   &\ \exists t \in (NT \cup CT) : (t,rt) \in \text{fills}\\
+\forall ct \in CT   &: \text{parts}(ct) \neq \emptyset\\
+\forall rt \in RT   &\ \exists ! ct \in CT : rt \in \text{parts}(ct)\\
+\forall rst \in RST &: \text{rel}(rst) = (rt_1,rt_2) \wedge rt_1 \neq rt_2\\
+\forall rst \in RST &\ \exists ct \in CT : \text{rel}(rst) = (rt_1,rt_2)\ \wedge\nonumber\\
+                    &\ rt_1,rt_2 \in \text{parts}(ct)
+\end{align} 
+\end{definition}
+
+\noindent
+In detail, \emph{fills} denotes that rigid types can play roles of a
+certain role type, \emph{parts} maps compartment types to their
+contained role types, and \emph{rel} captures the two role types at the
+respective ends of each relationship type. The well-formedness rules
+ensure that the \emph{fills}-relation is surjective (1); each
+compartment type has a nonempty, disjoint set of role types as its parts
+(2, 3); and \emph{rel} maps each relationship type to exactly two
+distinct role types of the same compartment type (4, 5).
+
+\begin{example}[Compartment Role Object Model]
+Let $\mathcal{B} = (NT, RT, CT, RST,\text{fills}, \text{parts}, \text{rel})$ be the model of the bank,
+where the idividual components are defined as follows:
+\begin{align*}
+NT \coloneqq \{ &\text{Person}, \text{Company}, \text{Account} \}\\
+RT \coloneqq \{ &\text{Customer}, \text{Consultant},\text{CA},\text{SA},\text{Source},\text{Target},\\
+                &\text{MoneyTransfer} \}\\
+CT = \{ &\text{Bank}, \text{Transaction} \}\\
+RST = \{ &\text{own\_ca}, \text{own\_sa}, \text{advises}, \text{trans} \}\\
+\mathit{fills} \coloneqq \{ &(\text{Person}, \text{Consultant}), (\text{Person}, \text{Customer}),%\\
+\end{align*}
+%$NT \coloneqq \{ \text{Person}, \text{Company}, \text{Account} \}$ is the set of natural types,\linebreak
+%$RT \coloneqq \{ \text{Customer}, \text{Consultant},\text{CA},\text{SA},\text{Source},\text{Target},$ $\text{MoneyTransfer} \}$ the set of role types,
+%$CT = \{\text{Bank},$ $\text{Transaction} \}$ the set of compartment types, and
+%$RST = \{\text{own\_ca},$ $\text{own\_sa},$ $\text{advises},$ $\text{trans} \}$ the set of relationship types.
+%The other elements are specified as follows:
+\begin{align*}
+            & (\text{Company}, \text{Customer}), (\text{Account}, \text{Source}),\\
+            & (\text{Account}, \text{Target}), (\text{Account}, \text{CA}),\\
+            & (\text{Account}, \text{SA}), (\text{Transaction}, \text{MoneyTransfer}) \}\\
+ \mathit{parts} \coloneqq \{ & \text{Bank} \rightarrow \{\text{Consultant},\text{Customer},\text{CA},\text{SA},\\
+                                                        &\ \text{MoneyTransfer} \},\\
+                                          & \text{Transaction} \rightarrow \{ \text{Source},\text{Target}\} \}\\
+ \mathit{rel} \coloneqq \{ & \text{own\_ca} \rightarrow (\text{Customer},\text{CA}),\\
+                           & \text{own\_sa} \rightarrow (\text{Customer},\text{SA}),\\
+                           & \text{advises} \rightarrow (\text{Consultant},\text{Customer}),\\
+                           & \text{trans} \rightarrow (\text{Source},\text{Target}) \}
+\end{align*}
+\end{example}
+
+\noindent
+The bank model $\mathcal{B}$ is simply created in four steps. First, all
+the natural types, compartment types, role types, and relationship types
+are collected into the corresponding set.\footnotemark[1]
+ Second, the set of role types contained in each compartment type is
+assigned to the \emph{parts}-function. Third, it is specified which
+natural type can \emph{fill} which role type, and finally the
+\emph{rel}-function is defined for the role types at the ends of each
+relationship type. Thus, CROMs can be retrieved from their graphical
+representation. The presented bank model $\mathcal{B}$ is well-formed,
+because each defined role type is filled by at least one natural type or
+compartment type (1), each compartment type consists of a non-empty (2)
+and disjoint (3) set of role types, and each relationship type is
+established between two distinct role types (4) of the same compartment
+type (5).
+
+\subsection{Instance Level}\label{instance-level}
+
+\subsection{Constraint Level}\label{constraint-level}
+
+\chapter{First Family of Role-based Modeling
+Editors}\label{first-family-of-role-based-modeling-editors}
+
+\section{Architecture}\label{architecture}
+
+\section{Configuration}\label{configuration}
+
+\section{Family of Model
+Transformations}\label{family-of-model-transformations}
+
+\chapter{Conclusion}\label{conclusion}
+
+\section{Summery}\label{summery}
+
+\section{Related Work}\label{related-work}
+
+\section{Contributions}\label{contributions}
+
+\section{Future Research}\label{future-research}
+
+\subsection{Adding Time to the Formal
+Model}\label{adding-time-to-the-formal-model}
+
+\listoffigures
+
+\listoftables
+
+\lstlistoflistings
+
+% add list of abbriviation
+\printacronyms[sort,heading=chapter*,name=List of Abbreviations]
+
+\nocite{*}
+\renewcommand{\bibname}{References}
+\bibliographystyle{apalike}
+\bibliography{thesis.bib}
+
+
+
+\end{document}
