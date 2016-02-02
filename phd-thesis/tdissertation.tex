@@ -1,0 +1,183 @@
+\RequirePackage[ngerman=ngerman-x-latest]{hyphsubst}
+\documentclass[english,ngerman,BCOR=6mm,cdgeometry=no,DIV=13,twoside$if(cd)$,cd=$cd$$endif$$if(chapterpage)$,chapterpage=true$endif$$if(sfmath)$,cdmath=false$endif$$if(replacefont)$,cdfont=false,cdhead=false$endif$]{tudscrreprt}
+\usepackage{selinput}\SelectInputMappings{adieresis={ä},germandbls={ß}}
+\usepackage{scrhack} % To fix some of the warnings regarding floats
+
+$if(replacefont)$
+\usepackage{$replacefont$}
+$endif$
+\usepackage[T1]{fontenc}
+
+\usepackage[main=$lang$]{babel}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{isodate}
+
+\usepackage[table]{xcolor}
+\definecolor{LinkColor}{rgb}{0,0,0.3}
+
+
+% typical mathesymbols
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{wasysym}
+
+
+
+$if(sfmath)$
+\usepackage[$sfmath$]{sfmath}
+$endif$
+
+
+% to allow subfigures inside the figure Environment
+\usepackage{subfig}
+% insert images
+\usepackage{graphicx}
+% make all include graphics correspond to width and aspectratio
+\setkeys{Gin}{width=\linewidth,keepaspectratio}
+
+% use bibliography
+$if(natbib)$
+\usepackage[authoryear]{natbib}
+$endif$
+
+%allow urls in the code
+% Definitionen von Farben
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,%
+           linkcolor=LinkColor,%
+           citecolor=LinkColor,%
+           filecolor=LinkColor,%
+           menucolor=LinkColor,%
+           %pagecolor=LinkColor,%
+           urlcolor=LinkColor}
+
+% insert sourcecode
+\usepackage{listings}
+% package for advanzed enumerations
+\usepackage{enumerate}
+
+%Packages and declarations for acronyms
+\usepackage[single,sort]{acro}
+$for(acronyms)$
+\DeclareAcronym{$acronyms.short$}{
+short = $acronyms.short$, long = $acronyms.long$%
+$if(acronyms.short-plural)$, short-plural = $acronyms.short-plural$$endif$%
+$if(acronyms.long-plural)$, long-plural = $acronyms.long-plural$$endif$%
+}
+$endfor$
+
+
+
+$if(preamble)$
+%Preamble generated from md
+$preamble$
+$endif$
+
+
+%allow todos in the text
+\newcommand{\todo}[1]{\fbox{\scriptsize\textbf{#1}}}
+\newcommand{\todoln}[1]{\fbox{\scriptsize\parbox{.9\linewidth}{\textbf{#1}}}}
+
+\begin{document}
+\faculty{$faculty$}
+\department{$department$}
+\institute{$institute$}
+\chair{$chair$}
+\date{$date$}
+\author{$author$}
+\title{$title$}
+\thesis{diss}
+$for(graduation)$
+\graduation[$graduation.short$]{$graduation.description$}
+$endfor$
+\dateofbirth{$dateofbirth$}
+\placeofbirth{$placeofbirth$}
+$if(defensedate)$\defensedate{$defensedate$}$endif$
+
+$if(supervisors)$\supervisor{$for(supervisors)$$supervisors$$sep$\and $endfor$}$endif$
+$if(referees)$\referee{$for(referees)$$referees$$sep$\and $endfor$}$endif$
+$if(advisors)$\advisor{$for(advisors)$$advisors$$sep$\and $endfor$}$endif$
+$if(professors)$\professor{$for(professors)$$professors$$sep$\and $endfor$}$endif$
+
+$if(subtitle)$\subtitle{$subtitle$}$endif$
+$if(publishers)$\publishers{$publishers$}$endif$
+%Use \thanks{footnotetext} for footnotes on the title page
+
+$if(dedication)$\dedication{$dedication$}$endif$
+
+%Turn of TUD style for part pages
+\renewcommand*{\partpagestyle}{plain}
+
+$include-before$
+
+\maketitle
+
+%add acknowledgements
+
+\confirmation
+
+$if(blocking)$\blocking$endif$
+
+\TUDoption{abstract}{section,multiple}
+$for(abstract)$
+\begin{abstract}[pagestyle=plain]
+$abstract.default$
+$if(abstract.english)$
+\nextabstract[english]
+$abstract.english$
+$endif$
+$if(abstract.german)$
+\nextabstract[ngerman]
+$abstract.german$
+$endif$
+\end{abstract}
+$endfor$
+
+\tableofcontents
+
+$body$
+
+\listoffigures
+
+\listoftables
+
+\lstlistoflistings
+
+% add list of abbriviation
+$if(abbr-title)$
+\printacronyms[sort,heading=chapter*,name=$abbr-title$]
+$else$
+\printacronyms[sort,heading=chapter*]
+$endif$
+
+$if(bibliography)$
+$if(nocite)$
+\nocite{*}
+$endif$
+$if(biblio-title)$
+\renewcommand{\bibname}{$biblio-title$}
+$endif$
+\bibliographystyle{apalike}
+\bibliography{$bibliography$}
+$endif$
+
+$if(biblio-files)$
+%compatibility mode with old pandoc versions
+$if(nocite)$
+\nocite{*}
+$endif$
+$if(biblio-title)$
+\renewcommand{\bibname}{$biblio-title$}
+$endif$
+\bibliographystyle{apalike}
+\bibliography{$biblio-files$}
+$endif$
+
+$include-after$
+
+\end{document}
